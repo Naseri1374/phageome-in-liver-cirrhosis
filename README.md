@@ -63,5 +63,7 @@ $ taxonkit lineage --data-dir /media/biocool/aaaaaaaaa/taxdump taxid_control_cir
 
 
 ## Phage catalog construction
+Here, we proposed a method for developing phage gene-catalog. The pipeline used three strategies to construct the gut phage catalog to facilitate the taxonomic and functional analysis of the gut phageome in liver cirrhosis.
+
 ![image](https://user-images.githubusercontent.com/39089097/147871774-87f8e140-cdc7-43db-b668-e1f1e1a15ca3.png)
 
