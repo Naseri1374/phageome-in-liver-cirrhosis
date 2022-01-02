@@ -1,4 +1,4 @@
-# phageome-in-liver-cirrhosis-
+# phageome-in-liver-cirrhosis
 This repository provide details for the analyses performed this study:
 Investigation and characterization of human gut phageome in liver cirrhosis of defined etiologies
 
@@ -62,4 +62,6 @@ $ esearch -db nucleotide -query NC_031915.1,NC_031918.1|esummary|xtract -pattern
 $ taxonkit lineage --data-dir /media/biocool/aaaaaaaaa/taxdump taxid_control_cirr.txt| tee lineage_control_cirr.txt
 
 
+## Phage catalog construction
+![image](https://user-images.githubusercontent.com/39089097/147871774-87f8e140-cdc7-43db-b668-e1f1e1a15ca3.png)
 
