@@ -13,53 +13,53 @@ SRAtoolkit\
 FastViromeExplorer\
 megahit\
 edger\
-phyloseq\
+phyloseq
 
 ## Input dataset
-In this study, three previously published metagenomic datasets were employed for the analyses under the accession number of PRJEB6337, PRJNA373901, and PRJEB18041.\
+In this study, three previously published metagenomic datasets were employed for the analyses under the accession number of PRJEB6337, PRJNA373901, and PRJEB18041.
 
 ## Analysis pipeline
 
 ###### Download Data:
 
-./prefetch $(<SraAccList.txt)
+$ ./prefetch $(<SraAccList.txt)
 
-./fastq-dump --split-3 --gzip $(<SraAccList.txt)
+$ ./fastq-dump --split-3 --gzip $(<SraAccList.txt)
 
-for i in *_1.fastq; do java -jar ~/Desktop/Tools/Trimmomatic-0.36/trimmomatic-0.36.jar PE $i ${i/_1/_2} -baseout ${i/_sm/.fastq ILLUMINACLIP:Trimmomatic-0.36/adapters/TruSeq2-PE.fa:2:30:7 LEADING:30 TRAILING:30 SLIDINGWINDOW:4:30 MINLEN:80; done
+$ for i in *_1.fastq; do java -jar ~/Desktop/Tools/Trimmomatic-0.36/trimmomatic-0.36.jar PE $i ${i/_1/_2} -baseout ${i/_sm/.fastq ILLUMINACLIP:Trimmomatic-0.36/adapters/TruSeq2-PE.fa:2:30:7 LEADING:30 TRAILING:30 SLIDINGWINDOW:4:30 MINLEN:80; done
 
 
 ###### FastViromeExplorer:
 
-for i in *_1.fastq; do java -cp bin FastViromeExplorer -1 $i -2 ${i/_1/_2} -i ncbi-virus-kallisto-index-k31.idx -o output${i/_*.fastq/}; done
+$ for i in *_1.fastq; do java -cp bin FastViromeExplorer -1 $i -2 ${i/_1/_2} -i ncbi-virus-kallisto-index-k31.idx -o output${i/_*.fastq/}; done
 
-ncbi-acc-download --format fasta NC_016158 NC_011357
+$ ncbi-acc-download --format fasta NC_016158 NC_011357
 
-csplit -z NC_011043,NC_029014.fa '/>/' {*}
+$ csplit -z NC_011043,NC_029014.fa '/>/' {*}
 
 
 ###### NCBI Genome and Accession Download Scripts:
 
-ncbi-genome-download --format fasta,assembly-report --genus T2D_Meta_ACC_genome.txt bacteria
+$ ncbi-genome-download --format fasta,assembly-report --genus T2D_Meta_ACC_genome.txt bacteria
 
-ncbi-genome-download -l complete --parallel 3 --retries 10 -v -F protein-fasta --genus T2D_Meta_ACC_genome.txt bacteria
+$ ncbi-genome-download -l complete --parallel 3 --retries 10 -v -F protein-fasta --genus T2D_Meta_ACC_genome.txt bacteria
 
 
 ###### NCBI ftp genome downzload:
-grep -E 'GCF_000312305|GCF_000312645' assembly_summary_refseq.txt | cut -f 20 > ftp_folder.txt
-awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_fna_files.sh
-source download_fna_files.sh
+$ grep -E 'GCF_000312305|GCF_000312645' assembly_summary_refseq.txt | cut -f 20 > ftp_folder.txt
+$ awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"_"filesuffix;print "wget "ftpdir,file}' ftp_folder.txt > download_fna_files.sh
+$ source download_fna_files.sh
 
 
 ###### megahit:
-for i in ERR*_1.fastq.gz; do ./megahit -1 $i -2 ${i/_1/_2} -m 0.9  -t 12 -o assembly_${i/_*.fastq.gz/} ; done
+$ for i in ERR*_1.fastq.gz; do ./megahit -1 $i -2 ${i/_1/_2} -m 0.9  -t 12 -o assembly_${i/_*.fastq.gz/} ; done
 
 
 ###### convert Acssesion number to taxid:
-esearch -db nucleotide -query NC_031915.1,NC_031918.1|esummary|xtract -pattern TaxId -element TaxId >nnn.txt
+$ esearch -db nucleotide -query NC_031915.1,NC_031918.1|esummary|xtract -pattern TaxId -element TaxId >nnn.txt
 
 ###### get full linage of taxid
-taxonkit lineage --data-dir /media/biocool/aaaaaaaaa/taxdump taxid_control_cirr.txt| tee lineage_control_cirr.txt
+$ taxonkit lineage --data-dir /media/biocool/aaaaaaaaa/taxdump taxid_control_cirr.txt| tee lineage_control_cirr.txt
 
 
 
