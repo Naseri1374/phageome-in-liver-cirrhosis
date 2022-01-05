@@ -32,7 +32,11 @@ $ ./prefetch $(<SraAccList.txt)
 
 $ ./fastq-dump --split-3 --gzip $(<SraAccList.txt)
 
-$ for i in *_1.fastq; do java -jar ~/Desktop/Tools/Trimmomatic-0.36/trimmomatic-0.36.jar PE $i ${i/_1/_2} -baseout ${i/_sm/.fastq ILLUMINACLIP:Trimmomatic-0.36/adapters/TruSeq2-PE.fa:2:30:7 LEADING:30 TRAILING:30 SLIDINGWINDOW:4:30 MINLEN:80; done
+$ ./fastqc *.fq
+
+$ bowtie2 -p 8 -x GRCh38_noalt_as -1 SAMPLE_R1.fastq.gz -2 SAMPLE_R2.fastq.gz --un-conc SAMPLE_host_removed > SAMPLE_mapped_and_unmapped.sam
+
+$ for i in *_1.fastq; do java -jar Trimmomatic-0.36/trimmomatic-0.36.jar PE $i ${i/_1/_2} -baseout ${i/_sm/.fastq ILLUMINACLIP:Trimmomatic-0.36/adapters/TruSeq2-PE.fa:2:30:7 LEADING:30 TRAILING:30 SLIDINGWINDOW:4:30 MINLEN:80; done
 
 
 ###### FastViromeExplorer:
