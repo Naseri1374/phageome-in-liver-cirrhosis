@@ -10,6 +10,7 @@ Here, special attention has been paid to detecting the role of gut phageome in l
 ## Tools and Dependencies
 
 SRAtoolkit\
+bowtie2\
 FastViromeExplorer\
 megahit\
 edger\
