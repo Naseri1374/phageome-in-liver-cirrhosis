@@ -12,7 +12,6 @@ Option:  -seq           seq file
          -help          Help Information
 Example: perl $0 -fastq solid.fastq -o std.fastq
  
-Author : BENM <BinxiaoFeng\@gmail.com>
 \n);
 my ($Seq,$Qual,$Fastq,$Output,$Header,$Help);
 my %opts;
