@@ -17,7 +17,7 @@ cat NC_* > virus_database.fa
 
 cd Results/CRISPRFinderProperties/NC*/Spacers/
 cat *fasta > spacers.fa
-cd ../../../../
+cd ../
 cp Results/CRISPRFinderProperties/NC*/Spacers/spacers.fa .
 
 blastn -query spacers.fa -subject virus_database.fa -word_size 7 -evalue 1 -reward 1 -penalty -1 -outfmt 6 -gapopen 10 -gapextend 2 -out Blast_crispr.txt
