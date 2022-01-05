@@ -13,6 +13,7 @@ SRAtoolkit\
 bowtie2\
 FastViromeExplorer\
 megahit\
+MetaGeneMark\
 edger\
 phyloseq
 
