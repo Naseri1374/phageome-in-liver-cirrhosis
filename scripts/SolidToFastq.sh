@@ -13,9 +13,6 @@ Option:  -seq           seq file
 Example: perl $0 -fastq solid.fastq -o std.fastq
  
 Author : BENM <BinxiaoFeng\@gmail.com>
-Version: 1.2
-Date   : 2009-10-06
-Update : 2012-03-27
 \n);
 my ($Seq,$Qual,$Fastq,$Output,$Header,$Help);
 my %opts;
